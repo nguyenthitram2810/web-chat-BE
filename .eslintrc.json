@@ -16,6 +16,8 @@
         "sourceType": "module"
     },
     "rules": {
+        "quotes": ["error","double"],
+        "semi": ["error","always"],
         "linebreak-style": 0,
         "indent": 0,
         "consistent-return": 0,
