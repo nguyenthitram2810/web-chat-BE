@@ -24,7 +24,7 @@ export default (app) => {
         return undefined;
     }));
     connectDB();
-    app.use("/api/", initRoutes);
+    app.use("/api/v1", initRoutes);
     app.use("*", (req, res) => res.status(404).json({
 					status: 404,
 					message: "Not found",

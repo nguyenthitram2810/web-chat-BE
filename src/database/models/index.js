@@ -1,3 +1,6 @@
-import User from './User';
+import UserModel from './User';
 
-export default { User };
+const models = {}
+models.User = UserModel
+
+export const Models = models;
