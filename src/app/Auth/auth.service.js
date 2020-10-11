@@ -35,7 +35,7 @@ class AuthService {
         }
         const responseData = {
             token: signToken,
-            userInfo: userInfo
+            userInfo
         }
 
         return responseData;
@@ -64,7 +64,7 @@ class AuthService {
         const signToken = TokenService.sign(signPayload);
         const responseData = {
             token: signToken,
-            data: userInfo
+            userInfo
         };
 
         return responseData;
