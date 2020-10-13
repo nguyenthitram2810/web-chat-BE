@@ -10,4 +10,8 @@ export default class Repository {
     createOne(payload) {
         return this.model.create(payload)
     }
+
+    getManyLimit(conditions) {
+        return this.model.find(conditions.key).limit(conditions.limit)
+    }
 }

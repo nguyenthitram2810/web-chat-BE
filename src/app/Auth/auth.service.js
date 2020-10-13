@@ -13,8 +13,10 @@ class AuthService {
 
     async signup(payload) {
         const { email, username, password } = payload;
+        payload.username = payload.username.toUpperCase();
         payload.password = bcrypt.hashSync(password, saltRounds);
         payload.slug = slugTransfer(`${username}-${Date.now()}`);
+        payload.avatar = "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png";
         const user = await this.repository.getOne({ email: email });
     
         if(user != null) {
@@ -23,7 +25,7 @@ class AuthService {
 
         const returnedData = await this.repository.createOne(payload);
         const signPayload = {
-            id: returnedData.id,
+            id: returnedData._id,
             slug: returnedData.slug,
         };
         const signToken = TokenService.sign(signPayload);
@@ -32,6 +34,7 @@ class AuthService {
             email: returnedData.email,
             _id: returnedData._id,
             slug: returnedData.slug,
+            avatar: returnedData.avatar,
         }
         const responseData = {
             token: signToken,
