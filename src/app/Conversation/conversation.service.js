@@ -44,6 +44,14 @@ class ConversationService {
         }
         return responseData;
     }
+
+    async getConversation(query) {
+        const conversation = await this.repository.getOneConversation(query.roomId)
+        const responseData = {
+            conversation
+        }
+        return responseData;
+    }
 }
 
 export default new ConversationService();

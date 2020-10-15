@@ -58,6 +58,7 @@ class AuthService {
             email: user.email,
             _id: user._id,
             slug: user.slug,
+            avatar: user.avatar
         };
 
         const signPayload = {

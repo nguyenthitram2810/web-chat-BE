@@ -29,5 +29,12 @@ class ConversationHandler {
             this.controller.call("checkExistConversation")
         ];
     }
+
+    getConversation() {
+        return [
+            this.authen.call("verify"),
+            this.controller.call("getConversation")
+        ];
+    }
 }
 export default new ConversationHandler();

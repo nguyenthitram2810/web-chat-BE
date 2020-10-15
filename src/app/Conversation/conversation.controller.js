@@ -49,7 +49,23 @@ class ConversationController extends BaseController {
 
             return response.status(httpStatus.OK).json({
                 status: httpStatus.OK,
-                message: "Get list conversation success",
+                message: "Check conversation success",
+                data: responseData,
+            })
+        }
+        catch(error) {
+            return this.ErrorHandler(response, error);
+        }
+    }
+
+    async getConversation(request, response) {
+        try {
+            const { query } = request
+            const responseData = await this.service.getConversation(query);
+
+            return response.status(httpStatus.OK).json({
+                status: httpStatus.OK,
+                message: "Get conversation success",
                 data: responseData,
             })
         }
