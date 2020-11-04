@@ -1,15 +1,21 @@
 import ConversationRepository from "./conversation.repository"
-import { saltRounds } from "../../constants/secret"
-import bcrypt from "bcrypt";
-import TokenService from "../../service/jwt";
-import slugTransfer from "speakingurl";
-
-import LogicError from "../../errors/Logic.error"
-import { request } from "express";
+import MessageRepository from "../Message/message.repository"
 
 class ConversationService {
+    static service;
+    static io;
+    static notifyIO;
+
     constructor() {
         this.repository = ConversationRepository;
+        this.messageRepository = MessageRepository
+    }
+
+    static getService() {
+        if (!this.service) {
+          this.service = new this();
+        }
+        return this.service;
     }
 
     async createConversation(payload, userId) {
@@ -47,11 +53,31 @@ class ConversationService {
 
     async getConversation(query) {
         const conversation = await this.repository.getOneConversation(query.roomId)
+        const message = await this.messageRepository.getListMessage(query.roomId)
         const responseData = {
-            conversation
+            conversation, 
+            message
         }
         return responseData;
     }
+
+    emitSocketNewMessage(userId, returnMessage, userIds, conversation) {
+      // const conversation = await this.repository.getOneConversation(conversationID)
+      // userIds.forEach((m) => {
+      //   if (m.id !== userId) {
+      //     ConversationService.notifyIO.to(m.id).emit('notifyMessage',
+      //     {
+      //       message, ID, conversations, roomID,
+      //     });
+      //   }
+      // });
+      console.log(conversation);
+      ConversationService.io.to(conversation._id).emit('new-message-room',
+      {
+        returnMessage, userId, conversation,
+      });     
+      // return conversation 
+    }
 }
 
-export default new ConversationService();
+export default ConversationService;

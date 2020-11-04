@@ -5,7 +5,7 @@ import BaseController from "../../infrastructure/Controller";
 class ConversationController extends BaseController {
     constructor() {
         super();
-        this.service = ConversationService;
+        this.service = ConversationService.getService();
     }
 
     async createConversation(request, response) {
