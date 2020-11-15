@@ -63,20 +63,19 @@ class ConversationService {
 
     emitSocketNewMessage(userId, returnMessage, userIds, conversation) {
       // const conversation = await this.repository.getOneConversation(conversationID)
-      // userIds.forEach((m) => {
-      //   if (m.id !== userId) {
-      //     ConversationService.notifyIO.to(m.id).emit('notifyMessage',
-      //     {
-      //       message, ID, conversations, roomID,
-      //     });
-      //   }
-      // });
-      console.log(conversation);
+      userIds.forEach((m) => {
+        if (m.id !== userId) {
+          ConversationService.notifyIO.to(m.id).emit('notifyMessage',
+          {
+            returnMessage, userId, conversation,
+          });
+        }
+      });
+      ;
       ConversationService.io.to(conversation._id).emit('new-message-room',
       {
         returnMessage, userId, conversation,
-      });     
-      // return conversation 
+      });    
     }
 }
 

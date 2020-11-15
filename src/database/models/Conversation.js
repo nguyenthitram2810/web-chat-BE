@@ -10,7 +10,10 @@ const schema = new mongoose.Schema({
     ref: 'users',
   }],
   lastMessage: String, 
-  lastUser: String,
+  lastUser: {
+    type: Schema.Types.ObjectId,
+    ref: 'users',
+  },
   avatar: String,
 }, {
   timestamps: true,

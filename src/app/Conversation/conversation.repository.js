@@ -11,6 +11,7 @@ class ConversationRepository extends BaseRepository  {
         return Models.Conversation.find({ userIds: { $elemMatch: { $eq: userId } } })
         .select('groupName lastMessage lastUser avatar _id updatedAt createdAt')
         .populate('userIds', 'username email slug avatar _id')
+        .populate('lastUser', 'username avatar slug _id')
         .sort({ updatedAt: -1 });
     }
 
