@@ -22,14 +22,17 @@ export default (app) => {
       return next();
     });
     const server = http.createServer(app);
+    
     app.use(logger("dev"));
     app.use(express.json());
 	app.use(express.urlencoded({ extended: true }));
+	app.use(cors("*"));
     app.use(methodOverride("X-HTTP-Method-Override"));
     app.use(methodOverride((req) => {
         if (req.body && typeof req.body === "object" && "_method" in req.body) {
             const method = req.body._method;
             delete req.body._method;
+
             return method;
         }
 
