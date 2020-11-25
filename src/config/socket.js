@@ -9,8 +9,8 @@ const socketToRoom = {};
 export default function (server) {
     const io = socket(server, {
         cors: {
-          origin: "ws://multimedia--chat-api.herokuapp.com",
-          methods: ["GET", "POST"],
+          origin: "*",
+          methods: ["GET", "POST", "DELETE", "PUT"],
           allowedHeaders: ["my-custom-header"],
           credentials: true
         }
