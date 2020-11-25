@@ -9,7 +9,6 @@ const socketToRoom = {};
 export default function (server) {
     const io = socket(server, {
         cors: {
-          origin: "*",
           methods: ["GET", "POST", "DELETE", "PUT"],
           allowedHeaders: ["my-custom-header"],
           credentials: true
