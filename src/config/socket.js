@@ -7,13 +7,7 @@ const users = {};
 const socketToRoom = {};
 
 export default function (server) {
-    const io = socket(server, {
-        cors: {
-          methods: ["GET", "POST", "DELETE", "PUT"],
-          allowedHeaders: ["my-custom-header"],
-          credentials: true
-        }
-      })
+    const io = socket(server)
 
     ConversationService.io = io.of('/Conversation').on('connection', (client) => {
         client.on('join', (id) => {
