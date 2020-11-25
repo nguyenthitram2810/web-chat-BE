@@ -21,7 +21,6 @@ export default (app) => {
     app.use(logger("dev"));
     app.use(express.json());
 	app.use(express.urlencoded({ extended: true }));
-	app.use(cors("*"));
     app.use(methodOverride("X-HTTP-Method-Override"));
     app.use(methodOverride((req) => {
         if (req.body && typeof req.body === "object" && "_method" in req.body) {
