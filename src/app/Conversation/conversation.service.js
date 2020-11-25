@@ -52,6 +52,7 @@ class ConversationService {
     }
 
     async getConversation(query) {
+      console.log(query);
         const conversation = await this.repository.getOneConversation(query.roomId)
         const message = await this.messageRepository.getListMessage(query.roomId)
         const responseData = {
@@ -62,16 +63,16 @@ class ConversationService {
     }
 
     emitSocketNewMessage(userId, returnMessage, userIds, conversation) {
-      // const conversation = await this.repository.getOneConversation(conversationID)
+      console.log(userIds);
       userIds.forEach((m) => {
-        if (m.id !== userId) {
-          ConversationService.notifyIO.to(m.id).emit('notifyMessage',
+        if (m._id !== userId) {
+          ConversationService.notifyIO.to(m._id).emit('notifyMessage',
           {
             returnMessage, userId, conversation,
           });
         }
       });
-      ;
+      
       ConversationService.io.to(conversation._id).emit('new-message-room',
       {
         returnMessage, userId, conversation,
