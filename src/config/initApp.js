@@ -16,7 +16,7 @@ export default (app) => {
 
     //     next();
     // });
-    app.use(cors({credentials: false, origin: 'http://multimedia--chat-api.herokuapp.com'}));
+    app.use(cors({credentials: false, origin: 'http://multimedia--chat-api.herokuapp.com/*'}));
     const server = http.createServer(app);
     configSocket(server);
     app.use(logger("dev"));
