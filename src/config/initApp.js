@@ -17,7 +17,7 @@ export default (app) => {
         next();
     });
     const server = http.createServer(app);
-    
+    configSocket(server);
     app.use(logger("dev"));
     app.use(express.json());
 	app.use(express.urlencoded({ extended: true }));
@@ -34,7 +34,6 @@ export default (app) => {
         return undefined;
     }));
     connectDB();
-    configSocket(server);
     app.use("/api/v1", initRoutes);
     app.use("*", (req, res) => res.status(404).json({
 					status: 404,
