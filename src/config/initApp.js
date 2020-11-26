@@ -1,7 +1,7 @@
 import express from "express";
 import logger from "morgan";
 import methodOverride from "method-override";
-
+import cors from "cors";
 import http from 'http';
 import initRoutes from '../routes/index';
 import connectDB from '../database/connection';
