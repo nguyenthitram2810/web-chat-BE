@@ -7,7 +7,7 @@
 import debugLib from 'debug';
 import http from 'http';
 import app from '../app';
-
+import configSocket from '../config/socket';
 const debug = debugLib('messenger:server');
 /**
  * Get port from environment and store in Express.
@@ -21,7 +21,7 @@ app.set('port', port);
  */
 
 const server = http.createServer(app);
-
+configSocket(server);
 /**
  * Listen on provided port, on all network interfaces.
  */

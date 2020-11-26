@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint --fix --ext .js .",
-    "dev": "nodemon --exec babel-node ./src/app",
+    "dev": "nodemon --exec babel-node ./src/bin/www.js",
     "start": "node ./dist/bin/www.js",
     "clean": "rm -rf dist && mkdir dist",
-    "build:babel": "babel ./src --out-dir dist --copy-files",
-    "build": "npm run clean && npm run build:babel"
+    "build": "babel ./src --out-dir dist --copy-files",
+    "heroku-postbuild": "npm run clean && npm run build"
   },
   "author": "nguyentram",
   "license": "ISC",

@@ -1,11 +1,10 @@
 import express from "express";
 
 import initApp from "./config/initApp";
-import "dotenv/config";
-import cors from "cors";
+import env from 'dotenv';
 
 const app = express();
-app.use(cors());
+env.config();
 initApp(app);
 
 export default app;
