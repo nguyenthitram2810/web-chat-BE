@@ -1,7 +1,7 @@
 import express from "express";
 import logger from "morgan";
 import methodOverride from "method-override";
-import cors from "cors";
+
 import http from 'http';
 import initRoutes from '../routes/index';
 import connectDB from '../database/connection';
@@ -9,19 +9,12 @@ import Model from '../database/models/index';
 import configSocket from '../config/socket';
 
 export default (app) => {
-    app.use((req, res, next) => {
-        res.header('Access-Control-Allow-Origin', '*');
-        res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-
-        next();
-    });
     const server = http.createServer(app);
     configSocket(server);
     app.use(logger("dev"));
     app.use(express.json());
 	app.use(express.urlencoded({ extended: true }));
-	// app.use(cors("*"));
+	
     app.use(methodOverride("X-HTTP-Method-Override"));
     app.use(methodOverride((req) => {
         if (req.body && typeof req.body === "object" && "_method" in req.body) {
