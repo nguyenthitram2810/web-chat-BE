@@ -13,6 +13,7 @@ export default function (server) {
         client.on('join', (id) => {
             console.log(`Da join room ${id}`);
             client.join(id);
+            client.emit("join room roi", client.id);
         });
 
         client.on('left', (data) => {
