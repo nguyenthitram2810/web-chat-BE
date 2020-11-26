@@ -8,7 +8,7 @@ import connectDB from '../database/connection';
 import Model from '../database/models/index';
 import configSocket from '../config/socket';
 
-export default (app) => {z
+export default (app) => {
     app.use((req, res, next) => {
         res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
