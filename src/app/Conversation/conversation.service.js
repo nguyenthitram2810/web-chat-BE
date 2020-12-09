@@ -63,7 +63,11 @@ class ConversationService {
     }
 
     emitSocketNewMessage(userId, returnMessage, userIds, conversation) {
-      console.log(userIds);
+      ConversationService.io.to(conversation._id).emit('new-message-room',
+      {
+        returnMessage, userId, conversation,
+      }); 
+      
       userIds.forEach((m) => {
         if (m._id !== userId) {
           ConversationService.notifyIO.to(m._id).emit('notifyMessage',
@@ -71,12 +75,7 @@ class ConversationService {
             returnMessage, userId, conversation,
           });
         }
-      });
-      
-      ConversationService.io.to(conversation._id).emit('new-message-room',
-      {
-        returnMessage, userId, conversation,
-      });    
+      });   
     }
 }
 
