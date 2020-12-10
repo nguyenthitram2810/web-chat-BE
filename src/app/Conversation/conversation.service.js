@@ -21,12 +21,10 @@ class ConversationService {
     async createConversation(payload, userId) {
         const { userIds } = payload;
         userIds.push(userId);
-        console.log(userIds)
         if(userIds.length > 2) {
             payload.avatar = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQLq1511U6ljDQs6oL8CBB82-9vZWpcFGAmYw&usqp=CAU"
         }
         const newConversation = await this.repository.createOne(payload);
-        console.log(newConversation._id)
         const conversation = await this.repository.getOneConversation(newConversation._id);
         const responseData = {
             conversation
@@ -52,7 +50,6 @@ class ConversationService {
     }
 
     async getConversation(query) {
-      console.log(query);
         const conversation = await this.repository.getOneConversation(query.roomId)
         const message = await this.messageRepository.getListMessage(query.roomId)
         const responseData = {
