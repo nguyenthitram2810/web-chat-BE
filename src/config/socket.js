@@ -75,7 +75,7 @@ export default function (server) {
             data.list.userIds.forEach(e => {
                 if(e._id != data.user._id) {
                     ConversationService.notifyIO.to(e._id).emit('new call', {
-                        userCall: data.user._id, 
+                        userCall: data.user, 
                         roomID: data.list._id
                     });
                 }
